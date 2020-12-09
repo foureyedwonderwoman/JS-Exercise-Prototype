@@ -43,16 +43,17 @@ function Airplane(name) {
     this.name = name
     this.age = age
     this.stomach = []
-    this.eat = function(someFood) {
-       this.stomach.push (someFood)
-       }
-    this.poop = function() {
+ }
+    Person.prototype.eat = function(someFood) {
+      this.stomach.push (someFood)
+    }
+    Person.prototype.poop = function() {
       this.stomach.length = 0
-      }
-    this.toString = function(){
-      return `${name},${age}`
-      }
-}
+    }
+    Person.prototype.toString = function(){
+      return `${this.name},${this.age}`
+    }
+ 
  
 const mySelf = new Person("Angele","30")
 console.log(mySelf)
@@ -82,15 +83,17 @@ console.log(mySelf)
    this.milesPerGallon = milesPerGallon
    this.tank = 0
    this.odometer = 0
-   this.fill = function(gallons){
-     this.tank =+ gallons
+
+ }
+   Car.prototype.fill = function(gallons){
+     this.tank = this.tank + gallons
    }
-   this.drive = function(distance){
-     this.tank =- distance
-     this.odometer =+ distance
+   Car.prototype.drive = function(distance){
+     this.tank -= distance
+     this.odometer += distance
    }
     
-  }
+  
   
   
   /*
@@ -102,16 +105,16 @@ console.log(mySelf)
   */
  function Baby(name,age,favoriteToy) {
    Person.call(this,name,age)
-  
-  
-   this.favoriteToy = favoriteToy
-   this.play = function(){
-     return `playing with ${favoriteToy}`
-   }  
+   this.favoriteToy = favoriteToy  
  }
- Baby.prototype = Object.create(Person.prototype);
+ Baby.prototype = Object.create(Person.prototype)
+ Baby.prototype.play = function(){
+     return `Playing with ${this.favoriteToy}`
+ }  
+ 
+ 
  const littleOne = new Baby("little One","2","Train")
- console.log(littleOne)
+ console.log(littleOne.play)
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
