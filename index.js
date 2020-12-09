@@ -39,9 +39,23 @@ function Airplane(name) {
           + It should return a string with `name` and `age`. Example: "Mary, 50"
   */
   
- function Person() {
-    
-  }
+ function Person(name,age) {
+    this.name = name
+    this.age = age
+    this.stomach = []
+    this.eat = function(someFood) {
+       this.stomach.push (someFood)
+       }
+    this.poop = function() {
+      this.stomach.length = 0
+      }
+    this.toString = function(){
+      return `${name},${age}`
+      }
+}
+ 
+const mySelf = new Person("Angele","30")
+console.log(mySelf)
  
  
 
@@ -63,7 +77,18 @@ function Airplane(name) {
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car() {
+ function Car(model,milesPerGallon) {
+   this.model= model
+   this.milesPerGallon = milesPerGallon
+   this.tank = 0
+   this.odometer = 0
+   this.fill = function(gallons){
+     this.tank =+ gallons
+   }
+   this.drive = function(distance){
+     this.tank =- distance
+     this.odometer =+ distance
+   }
     
   }
   
@@ -75,18 +100,25 @@ function Airplane(name) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
-  }
- 
+ function Baby(name,age,favoriteToy) {
+   Person.call(this,name,age)
   
+  
+   this.favoriteToy = favoriteToy
+   this.play = function(){
+     return `playing with ${favoriteToy}`
+   }  
+ }
+ Baby.prototype = Object.create(Person.prototype);
+ const littleOne = new Baby("little One","2","Train")
+ console.log(littleOne)
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. its used within a global scope, meaning the window or whole file
+    2. implicit, which is within the function of a declared variable
+    3. explicit means you can create prototypes
+    4. you can also use in new instances
   */
   
   
